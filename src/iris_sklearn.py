@@ -20,7 +20,7 @@ def main():
         datefmt="%Y-%m-%d %H:%M:%S",
     )
     logger = logging.getLogger(__name__)
-    logger.info("Starting the script")
+    logger.info("* Starting the training on the iris dataset")
 
     # Create a directory for the models
     os.makedirs("out/models", exist_ok=True)
@@ -57,6 +57,8 @@ def main():
     # Save the model
     logger.info("Saving the model")
     joblib.dump(clf, "out/models/iris_clf.joblib")
+
+    logger.info("* Done")
 
 
 if __name__ == "__main__":
