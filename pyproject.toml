@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "ONNX Playground"
+version = "0.1.0"
+description = "A playground for ONNX"
+authors = ["Dewith <dewith@gmail.com>"]
+readme = "README.md"
+packages = [{include = "src"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+scikit-learn = "^1.7.0"
+onnx = "^1.18.0"
+skl2onnx = "^1.19.1"
+joblib = "^1.5.1"
+onnxruntime = "^1.22.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.3.4"
+ruff = "^0.9.6"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.ruff]
+line-length = 79
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
