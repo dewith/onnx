@@ -3,8 +3,9 @@ name = "ONNX Playground"
 version = "0.1.0"
 description = "A playground for ONNX"
 authors = ["Dewith <dewith@gmail.com>"]
-readme = "README.md"
+readme = "README"
 packages = [{include = "src"}]
+package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.12"
