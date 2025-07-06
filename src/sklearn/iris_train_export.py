@@ -1,5 +1,5 @@
 """
-A small script to convert a sklearn model to ONNX.
+A small script to train a sklearn model and export it to ONNX.
 """
 
 import logging
@@ -7,6 +7,9 @@ import os
 
 import joblib
 import numpy as np
+from skl2onnx import convert_sklearn
+from skl2onnx.common.data_types import FloatTensorType
+
 from sklearn.datasets import load_iris
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
@@ -54,9 +57,19 @@ def main():
     logger.info("Accuracy on train set: %.4f", accuracy_train)
     logger.info("Accuracy on test set: %.4f", accuracy_test)
 
+    # Convert the model to ONNX
+    logger.info("Converting the model to ONNX")
+    initial_type = [("float_input", FloatTensorType([None, 4]))]
+    clf_onnx = convert_sklearn(clf, initial_types=initial_type)
+
     # Save the model
-    logger.info("Saving the model")
-    joblib.dump(clf, "out/models/iris_clf.joblib")
+    logger.info("Saving the model as an ONNX file")
+    with open("out/models/iris_clf.onnx", "wb") as f:
+        f.write(clf_onnx.SerializeToString())
+
+    # Save the model
+    logger.info("Saving the model as a pickle file")
+    joblib.dump(clf, "out/models/iris_clf.pkl")
 
     logger.info("* Done")
 
